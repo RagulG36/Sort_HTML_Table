@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Sort a HTML Table</title>
+<link rel="stylesheet" href="style1.css">
+</head>
+<body>
+    <h2><storng>Click the headers to sort the table.</strong></h2>
+    <p>The first time you click, the sorting direction is ascending (A to Z).</p>
+    <p>Click again, and the sorting direction will be descending (Z to A):</p>
+    <div class="container">
+    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+        <thead>
+            <tr>
+                <th onclick="sortTable(0)">Name</th>
+                <th onclick="sortTable(1)">possition</th>
+                <th onclick="sortTable(2)">Office</th>
+                <th onclick="sortTable(3)">Age</th>
+                <th onclick="sortTable(4)">Salary</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Tamil</td>
+                <td>System Architect</td>
+                <td>Chennai</td>
+                <td>43</td>
+                <td>420,800</td>
+            </tr>
+            <tr>
+                <td>Ganga</td>
+                <td>Accountant</td>
+                <td>Trichy</td>
+                <td>42</td>
+                <td>370,750</td>
+            </tr>
+            <tr>
+                <td>Anand</td>
+                <td>Junior Software Engineer</td>
+                <td>Chennai</td>
+                <td>24</td>
+                <td>336,000</td>
+            </tr>
+            <tr>
+                <td>Siva</td>
+                <td>Senior Javascript Developer</td>
+                <td>Bangalore</td>
+                <td>27</td>
+                <td>433,060</td>
+            </tr>
+            <tr>
+                <td>Ragul</td>
+                <td>Php Developer</td>
+                <td>Chennai</td>
+                <td>22</td>
+                <td>362,700</td>
+            </tr>
+            <tr>
+                <td>Mani</td>
+                <td>Testing Engineer</td>
+                <td>Mumbai</td>
+                <td>32</td>
+                <td>372,000</td>
+            </tr>
+            <tr>
+                <td>Hennry</td>
+                <td>Developer</td>
+                <td>Delhi</td>
+                <td>34</td>
+                <td>437,500</td>
+            </tr>
+            <tr>
+                <td>Rhohit</td>
+                <td>HR</td>
+                <td>chennai</td>
+                <td>32</td>
+                <td>327,900</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="pagination">
+    <a href="ind.html">&laquo;</a>
+    <a href="ind.html">1</a>
+    <a href="ind.html">2</a>
+    <a href="ind.html">&raquo;</a>
+  </div>
+
+<script>
+    function sortTable(n) {
+      var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+      table = document.getElementById("dataTable");
+      switching = true;
+      dir = "asc"; 
+      while (switching) {
+        switching = false;
+        rows = table.rows;
+        for (i = 1; i < (rows.length - 1); i++) {
+          shouldSwitch = false;
+          x = rows[i].getElementsByTagName("TD")[n];
+          y = rows[i + 1].getElementsByTagName("TD")[n];
+          if (dir == "asc") {
+            if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+              shouldSwitch= true;
+              break;
+            }
+          } else if (dir == "desc") {
+            if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+              shouldSwitch = true;
+              break;
+            }
+          }
+        }
+        if (shouldSwitch) {
+          rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+          switching = true;
+          switchcount ++;      
+        } else {
+          if (switchcount == 0 && dir == "asc") {
+            dir = "desc";
+            switching = true;
+          }
+        }
+      }
+    }
+    </script>
+    
+</body>
+</html>
